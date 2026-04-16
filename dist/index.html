@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>eKYC SDK</title>
+    <script src="web-sdk-version-3.0.js"></script>
+    <script src="./lib/VNPTQRBrowserApp.js"></script>
+    <script src="./lib/VNPTBrowserSDKAppV4.1.0.js"></script>
+  </head>
+
+  <body>
+    <div id="ekyc_sdk_intergrated"></div>
+    <script>
+      // const BASE_URL_API = "https://api.idg.vnpt.vn/"; // link product
+      // const BASE_URL_API = "https://explorer.idg.vnpt.vn/"
+
+      // customer's config
+      const CALL_BACK_END_FLOW = async (result) => {
+        console.log('result ==>', result);
+      };
+      const CALL_BACK_DOCUMENT_RESULT = async (document_result) => {
+        console.log('document_result ==>', document_result);
+      };
+
+      const BACKEND_URL = 'https://sandbox-idg.vnpt.vn';
+      const TOKEN_KEY =
+        'MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIO3d/AUMnEboq355/IEJH4E5z0w6mWAzAMhid2Q0tSuWBd1ZYR70fq42qTeH1mif3aoB0HNQJl/FGm+FuUsx6cCAwEAAQ==';
+      const TOKEN_ID = '34fc6f00-544a-2b01-e063-1f08a30a6b6c';
+      const AUTHORIZION =
+        'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0cmFuc2FjdGlvbl9pZCI6IjhiOWE5NDFlLTUxMmQtNGVhNC1hNTAwLTIwNTgzZDFiODZiYiIsInN1YiI6IjNkMmVlZDJlLTJmYTUtMTFmMC05OTEyLTYzNTMxZGFmZDkwNyIsImF1ZCI6WyJyZXN0c2VydmljZSJdLCJ1c2VyX25hbWUiOiJ2YW5ob2FtMTBAZ21haWwuY29tIiwic2NvcGUiOlsicmVhZCJdLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdCIsIm5hbWUiOiJ2YW5ob2FtMTBAZ21haWwuY29tIiwiZXhwIjoxNzc3MDE3OTY4LCJ1dWlkX2FjY291bnQiOiIzZDJlZWQyZS0yZmE1LTExZjAtOTkxMi02MzUzMWRhZmQ5MDciLCJhdXRob3JpdGllcyI6WyJVU0VSIl0sImp0aSI6IjhkNDQ2MmE1LWVhNjctNDY2Yi1iY2Q2LTc4YWYwM2M4MGJlOSIsImNsaWVudF9pZCI6ImNsaWVudGFwcCJ9.XBXzEoURA8dXptIOxyKzGbMK1EK9sCeiuYgN8HQNAmiljjp0SgByu0IuZuiy1xknTsr8D3JWZU5xQFgwx7dPF_o8XbUnuT7mEE52G2YPe78anNuC2ZBidb-pscoOhNl5R6xS2RiqGidnw_ep9C4uRDt_9WFeQdc0kTd-z3X0rlmLWWx6vifn_nHG669IKBWEOfesrAioEq9hnR5F0YeeYgU_FbO46LEA1qHayqOlduAgCMslRd_LdEnWYrm2wHyAxA7QWHNoqrscHjj3QIdZAbH-e9rRlkGaenRocXAUD-bUorbFqNt4f3uCacSD8rgmRH9X1AqJyUwdykq-GXKq0A';
+      const HAS_BACKGROUND_IMAGE = true;
+      const dataConfig = {
+        // configs for API
+        BACKEND_URL,
+        TOKEN_KEY,
+        TOKEN_ID,
+        AUTHORIZION,
+        CALL_BACK_END_FLOW,
+        CALL_BACK_DOCUMENT_RESULT,
+        HAS_BACKGROUND_IMAGE,
+      };
+      window.addEventListener('DOMContentLoaded', function () {
+        if (window.SDK) {
+          window.SDK.launch(dataConfig);
+        }
+      });
+    </script>
+  </body>
+</html>
