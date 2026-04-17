@@ -26,7 +26,7 @@ jobs:
 
       - name: Generate release version
         id: release
-        run: echo "version=${{ steps.version.outputs.version }}.$(date +%s)" >> "$GITHUB_OUTPUT"
+        run: echo "version=${{ steps.version.outputs.version }}-$(date +%s)" >> "$GITHUB_OUTPUT"
 
       - name: Update package.json version
         run: |
