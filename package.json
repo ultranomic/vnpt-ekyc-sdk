@@ -1,6 +1,6 @@
 {
   "name": "@ultranomic/vnpt-ekyc-sdk",
-  "version": "3.0.1",
+  "version": "3.0.1-1776404243",
   "description": "VNPT eKYC SDK",
   "main": "dist/web-sdk-version-3.0.js",
   "types": "dist/web-sdk-version-3.0.d.ts",
