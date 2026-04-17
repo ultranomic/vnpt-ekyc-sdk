@@ -1,9 +1,13 @@
 name: Publish to GitHub Packages
 
 on:
-  release:
+  workflow_run:
+    workflows:
+      - "Create Release"
     types:
-      - published
+      - completed
+    branches:
+      - prod
   workflow_dispatch:
 
 jobs:
