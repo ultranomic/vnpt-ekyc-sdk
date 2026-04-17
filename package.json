@@ -20,12 +20,7 @@
     "./qr-upload": {
       "default": "./dist/lib/VNPTQRUpload.js",
       "types": "./dist/lib/VNPTQRUpload.d.ts"
-    },
-    "./assets/web-oval": "./dist/lib/web-oval.json",
-    "./assets/mobile-oval": "./dist/lib/mobile-oval.json",
-    "./assets/bg-vnpt": "./dist/lib/bg-vnpt.svg",
-    "./assets/vietnamese-tutorial": "./dist/lib/vietnamese-tutorial.mp4",
-    "./assets/english-tutorial": "./dist/lib/english-tutorial.mp4"
+    }
   },
   "files": [
     "dist/"
@@ -33,8 +28,5 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/ultranomic/vnpt-ekyc-sdk.git"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
   }
 }

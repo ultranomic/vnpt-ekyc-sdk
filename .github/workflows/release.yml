@@ -1,17 +1,19 @@
-name: Create Release
+name: Release & Publish
 
 on:
   push:
     branches:
       - prod
+  workflow_dispatch:
 
 jobs:
-  release:
+  release-and-publish:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      id-token: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Get version from package.json
         id: version
@@ -30,3 +32,11 @@ jobs:
           tag_name: v${{ steps.version.outputs.version }}
           name: v${{ steps.version.outputs.version }}
           generate_release_notes: true
+
+      - name: Unpublish existing version from JSR
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          npx jsr unpublish @ultranomic/vnpt-ekyc-sdk@$VERSION || true
+
+      - name: Publish to JSR
+        run: npx jsr publish
