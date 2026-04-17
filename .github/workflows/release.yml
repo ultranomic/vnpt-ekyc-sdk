@@ -36,4 +36,4 @@ jobs:
           node -e "const j=require('./jsr.json'); j.version='$VERSION'; require('fs').writeFileSync('jsr.json', JSON.stringify(j, null, 2)+'\n')"
 
       - name: Publish to JSR
-        run: npx jsr publish --allow-slow-types
+        run: npx jsr publish --allow-slow-types --allow-dirty
