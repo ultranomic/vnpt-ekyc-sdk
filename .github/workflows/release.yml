@@ -19,24 +19,21 @@ jobs:
         id: version
         run: echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
 
-      - name: Delete existing release and tag if present
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          TAG="v${{ steps.version.outputs.version }}"
-          gh release delete "$TAG" --yes --cleanup-tag || true
+      - name: Generate release version
+        id: release
+        run: echo "version=${{ steps.version.outputs.version }}.$(date +%s)" >> "$GITHUB_OUTPUT"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v${{ steps.version.outputs.version }}
-          name: v${{ steps.version.outputs.version }}
+          tag_name: v${{ steps.release.outputs.version }}
+          name: v${{ steps.release.outputs.version }}
           generate_release_notes: true
 
-      - name: Unpublish existing version from JSR
+      - name: Update jsr.json version
         run: |
-          VERSION=$(node -p "require('./package.json').version")
-          npx jsr unpublish @ultranomic/vnpt-ekyc-sdk@$VERSION || true
+          VERSION="${{ steps.release.outputs.version }}"
+          node -e "const j=require('./jsr.json'); j.version='$VERSION'; require('fs').writeFileSync('jsr.json', JSON.stringify(j, null, 2)+'\n')"
 
       - name: Publish to JSR
-        run: npx jsr publish
+        run: npx jsr publish --allow-slow-types
