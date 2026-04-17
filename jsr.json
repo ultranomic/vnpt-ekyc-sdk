@@ -2,9 +2,22 @@
   "name": "@ultranomic/vnpt-ekyc-sdk",
   "version": "3.0.1",
   "exports": {
-    ".": "./dist/web-sdk-version-3.0.js",
-    "./browser": "./dist/lib/VNPTBrowserSDKAppV4.1.0.js",
-    "./qr-browser": "./dist/lib/VNPTQRBrowserApp.js",
-    "./qr-upload": "./dist/lib/VNPTQRUpload.js"
-  }
+    ".": {
+      "default": "./dist/web-sdk-version-3.0.js",
+      "types": "./dist/web-sdk-version-3.0.d.ts"
+    },
+    "./browser": {
+      "default": "./dist/lib/VNPTBrowserSDKAppV4.1.0.js",
+      "types": "./dist/lib/VNPTBrowserSDKAppV4.1.0.d.ts"
+    },
+    "./qr-browser": {
+      "default": "./dist/lib/VNPTQRBrowserApp.js",
+      "types": "./dist/lib/VNPTQRBrowserApp.d.ts"
+    },
+    "./qr-upload": {
+      "default": "./dist/lib/VNPTQRUpload.js",
+      "types": "./dist/lib/VNPTQRUpload.d.ts"
+    }
+  },
+  "license": "UNLICENSED"
 }
