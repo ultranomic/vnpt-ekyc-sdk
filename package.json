@@ -6,19 +6,19 @@
   "types": "dist/web-sdk-version-3.0.d.ts",
   "exports": {
     ".": {
-      "default": "./dist/web-sdk-version-3.0.js",
+      "import": "./dist/web-sdk-version-3.0.js",
       "types": "./dist/web-sdk-version-3.0.d.ts"
     },
     "./browser": {
-      "default": "./dist/lib/VNPTBrowserSDKAppV4.1.0.js",
+      "import": "./dist/lib/VNPTBrowserSDKAppV4.1.0.js",
       "types": "./dist/lib/VNPTBrowserSDKAppV4.1.0.d.ts"
     },
     "./qr-browser": {
-      "default": "./dist/lib/VNPTQRBrowserApp.js",
+      "import": "./dist/lib/VNPTQRBrowserApp.js",
       "types": "./dist/lib/VNPTQRBrowserApp.d.ts"
     },
     "./qr-upload": {
-      "default": "./dist/lib/VNPTQRUpload.js",
+      "import": "./dist/lib/VNPTQRUpload.js",
       "types": "./dist/lib/VNPTQRUpload.d.ts"
     }
   },

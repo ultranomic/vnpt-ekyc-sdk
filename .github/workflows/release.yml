@@ -15,6 +15,11 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+
       - name: Get version from package.json
         id: version
         run: echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
@@ -23,6 +28,11 @@ jobs:
         id: release
         run: echo "version=${{ steps.version.outputs.version }}.$(date +%s)" >> "$GITHUB_OUTPUT"
 
+      - name: Update package.json version
+        run: |
+          VERSION="${{ steps.release.outputs.version }}"
+          node -e "const p=require('./package.json'); p.version='$VERSION'; require('fs').writeFileSync('package.json', JSON.stringify(p, null, 2)+'\n')"
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
@@ -30,10 +40,7 @@ jobs:
           name: v${{ steps.release.outputs.version }}
           generate_release_notes: true
 
-      - name: Update jsr.json version
-        run: |
-          VERSION="${{ steps.release.outputs.version }}"
-          node -e "const j=require('./jsr.json'); j.version='$VERSION'; require('fs').writeFileSync('jsr.json', JSON.stringify(j, null, 2)+'\n')"
-
-      - name: Publish to JSR
-        run: npx jsr publish --allow-slow-types --allow-dirty
+      - name: Publish to npm
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
