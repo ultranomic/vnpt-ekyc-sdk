@@ -16,6 +16,7 @@ jobs:
     permissions:
       contents: read
       packages: write
+      package-delete: write
     steps:
       - uses: actions/checkout@v4
 
@@ -24,6 +25,20 @@ jobs:
           node-version: "24"
           registry-url: "https://npm.pkg.github.com"
 
-      - run: npm publish --force
+      - name: Delete existing package version
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          PACKAGE_ID=$(gh api "/user/packages/npm/@ultranomic%2Fvnpt-ekyc-sdk/versions" \
+            --jq ".[] | select(.metadata.package.version==\"$VERSION\") | .id")
+          if [ -n "$PACKAGE_ID" ]; then
+            gh api --method DELETE "/user/packages/npm/@ultranomic%2Fvnpt-ekyc-sdk/versions/$PACKAGE_ID"
+            echo "Deleted existing version $VERSION"
+          else
+            echo "No existing version $VERSION found"
+          fi
+
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
